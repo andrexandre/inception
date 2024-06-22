@@ -32,6 +32,19 @@ to list the images in your disk you can do:
 
 ...
 
+docker0 is the virtual bridge interface.
+
+docker network ls
+DRIVER = network type
+
+docker network create <name>
+
+
+
+
+
+
+
 Other commands:
 
 docker build -t inception .
