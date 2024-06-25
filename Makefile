@@ -11,18 +11,19 @@ OBJSDIR		:= objs
 NAME		:= inception
 
 all:
-	@docker build -t inception .
+	@docker run --name=$(NAME) -d -p 8080:80 $(NAME)
 	@echo "\n$(BLUE)$(NAME)$(END) $(GREEN)built$(END) 💻\n"
 
 clean:
+	@docker container prune -f
 	@echo "\n$(BLUE)$(NAME)$(END) $(GREEN)removed$(END) 🗑️\n"
 
 fclean: clean
 
 re: fclean all
 
-run:
-	@docker run inception
+build:
+	@docker build -t $(NAME) .
 
 v: re
 	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $(VARS)
