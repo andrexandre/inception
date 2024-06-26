@@ -18,13 +18,13 @@ to see the current containers you use:
 `docker ps -a`
 > `-a` is to list all the containers (not only the actively running)
 
-when you exit the container, it is stopped, but its still in memory, to remove it you use
+when you exit the container, it stops, but its still in memory, to remove it you use
 
 `docker rm <NAME/CONTAINER ID>`
 
 now you have it all cleaned up, almost exactly how it was before
 
-exept that downloaded image that you pulled(ubuntu) to the disk
+exept that downloaded image that you pulled to the disk, in this case, ubuntu
 
 to list the images in your disk you can do:
 
@@ -40,7 +40,7 @@ DRIVER = network type
 docker network create <name>
 
 
-
+WIP
 
 
 
@@ -51,7 +51,7 @@ docker build -t inception .
 
 docker run inception
 
-docker container prune -y
+docker container prune -f
 > removes all stopped containers
 
-docker run -p 5001:5001 inception
+docker run -p 8080:80 inception
