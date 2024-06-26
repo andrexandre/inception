@@ -51,7 +51,7 @@ docker build -t inception .
 
 docker run inception
 
-docker container prune
+docker container prune -y
 > removes all stopped containers
 
 docker run -p 5001:5001 inception
