@@ -7,26 +7,28 @@ MAGENTA		:= \033[1;35m
 CYAN		:= \033[1;36m
 WHITE		:= \033[1;37m
 
-OBJSDIR		:= objs
 NAME		:= inception
 
 all:
-	@docker run --name=$(NAME) -d -p 8080:80 $(NAME)
-	@echo "\n$(BLUE)$(NAME)$(END) $(GREEN)built$(END) 💻\n"
+	docker run --name=$(NAME) -d -p 8080:80 $(NAME)
+	@echo "\n$(BLUE)$(NAME)$(END) $(GREEN)running$(END) 💻\n"
 
 clean:
-	@docker container prune -f
+	docker stop $(NAME)
 	@echo "\n$(BLUE)$(NAME)$(END) $(GREEN)removed$(END) 🗑️\n"
 
 fclean: clean
+# docker rm $(NAME)
+	docker container prune -f
 
-re: fclean all
+re: fclean build all
 
 build:
-	@docker build -t $(NAME) .
+	docker build -t $(NAME) .
+	@echo "\n$(BLUE)$(NAME)$(END) $(GREEN)built$(END) 🛠️\n"
 
-v: re
-	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $(VARS)
+exec:
+	docker exec -it $(NAME) bash
 
 e: fclean
 
