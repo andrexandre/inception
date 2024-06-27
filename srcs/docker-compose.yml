@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx
+    container_name: nginx
+    build:
+      context: ./requirements/nginx/
+      dockerfile: Dockerfile
+    ports:
+      - 8080:80
+      # - 443:443
+    # volumes:
+    #   - wordpress_data:/var/www/html
+    # networks:
+    #   - inception
+    # depends_on:
+    #   - wordpress
+    # restart: "on-failure"
+    # env_file:
+    #   - .env
