@@ -12,7 +12,7 @@ SRCS		= ./srcs
 COMPOSE		= $(SRCS)/docker-compose.yml
 HOST_URL	= analexan.42.fr
 
-all:
+all: build
 	docker run --name=$(NAME) -d -p 8080:80 $(NAME)
 	@echo "\n$(BLUE)$(NAME)$(END) $(GREEN)running$(END) 💻\n"
 
@@ -21,7 +21,6 @@ clean:
 	@echo "\n$(BLUE)$(NAME)$(END) $(GREEN)removed$(END) 🗑️\n"
 
 fclean: clean
-# docker rm $(NAME)
 	docker container prune -f
 
 re: fclean build all

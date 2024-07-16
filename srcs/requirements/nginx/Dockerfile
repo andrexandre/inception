@@ -1,10 +1,6 @@
 FROM nginx
-# FROM debian:11
 
-# WORKDIR /app
+COPY ./tools/index.html /usr/share/nginx/html
+COPY ./conf/nginx.conf /etc/nginx/nginx.conf
 
-# EXPOSE 443
-
-COPY ./tools /usr/share/nginx/html
-
-# RUN apt-get update && apt-get install -y nginx && /etc/init.d/nginx start
+RUN chown -R nginx:nginx /usr/share/nginx/html/index.html

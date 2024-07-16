@@ -9,7 +9,7 @@ WHITE		= \033[1;37m
 
 NAME		= inception
 
-all:
+all: build
 	docker run --name=$(NAME) -d -p 8080:80 $(NAME)
 	@echo "\n$(BLUE)$(NAME)$(END) $(GREEN)running$(END) 💻\n"
 
@@ -18,7 +18,6 @@ clean:
 	@echo "\n$(BLUE)$(NAME)$(END) $(GREEN)removed$(END) 🗑️\n"
 
 fclean: clean
-# docker rm $(NAME)
 	docker container prune -f
 
 re: fclean build all
