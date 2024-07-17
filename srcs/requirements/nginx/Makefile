@@ -7,14 +7,15 @@ MAGENTA		= \033[1;35m
 CYAN		= \033[1;36m
 WHITE		= \033[1;37m
 
-NAME		= inception
+NAME		= nginx
 
 all: build
-	docker run --name=$(NAME) -d -p 8080:80 $(NAME)
+	docker run --name=$(NAME) -d -p 443:80 $(NAME)
+# docker run --name=$(NAME) -d -p 8080:80 $(NAME)
 	@echo "\n$(BLUE)$(NAME)$(END) $(GREEN)running$(END) 💻\n"
 
 clean:
-	docker stop $(NAME)
+	-docker stop $(NAME)
 	@echo "\n$(BLUE)$(NAME)$(END) $(GREEN)removed$(END) 🗑️\n"
 
 fclean: clean
