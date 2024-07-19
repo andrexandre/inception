@@ -8,30 +8,32 @@ CYAN		= \033[1;36m
 WHITE		= \033[1;37m
 
 NAME		= inception
-SRCS		= ./srcs
-COMPOSE		= $(SRCS)/docker-compose.yml
 HOST_URL	= analexan.42.fr
 
-all: build
-	docker run --name=$(NAME) -d -p 8080:80 $(NAME)
-	@echo "\n$(BLUE)$(NAME)$(END) $(GREEN)running$(END) 💻\n"
+CMD = help
+
+%:
+	@$(MAKE) -s all CMD=$@
+
+help:
+	@curl -s https://pastebin.com/raw/efMyMp23
+
+all:
+	@sudo docker compose -f srcs/docker-compose.yml $(CMD)
+
+re: clean down up
 
 clean:
-	docker stop $(NAME)
-	@echo "\n$(BLUE)$(NAME)$(END) $(GREEN)removed$(END) 🗑️\n"
+	docker container prune -f
+	@echo "\n$(BLUE)containers $(GREEN)cleaned$(END) 🗑️\n"
 
 fclean: clean
-	docker container prune -f
+	-docker rmi -f $$(docker images -q)
+	@echo "\n$(BLUE)images $(GREEN)cleaned$(END) 🗑️\n"
 
-re: fclean build all
+ps:
+	docker ps -a
 
-build:
-	docker build -t $(NAME) .
-	@echo "\n$(BLUE)$(NAME)$(END) $(GREEN)built$(END) 🛠️\n"
+e: down
 
-exec:
-	docker exec -it $(NAME) bash
-
-e: fclean
-
-.PHONY: all clean fclean re run e
+# .PHONY: all clean fclean re e

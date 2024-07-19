@@ -32,14 +32,19 @@ to list the images in your disk you can do:
 
 #### Other commands:
 
-docker build -t inception .
+`docker build -t inception .`
 > `-t` is to specify the name of the container
 
-docker run -p 8080:80 inception
-> 8080 is an opened port on our pc and 80 is on the container
+`docker run --name=inception -p 443:80 inception`
+> 443 is an opened port on our pc and 80 is on the container
 
-docker container prune -f
+`docker stop inception`
+
+`docker container prune -f`
 > removes all stopped containers
+
+`docker exec -it inception bash`
+> enters into the container
 
 WIP...
 
