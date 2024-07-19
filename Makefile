@@ -21,6 +21,14 @@ help:
 all:
 	@sudo docker compose -f srcs/docker-compose.yml $(CMD)
 
+exec:
+	@read -p "1 - nginx, 2 - wordpress, 3 - mariadb: " choice && \
+	case $$choice in \
+		1) docker exec -it nginx bash; ;; \
+		2) docker exec -it wordpress bash; ;; \
+		3) docker exec -it mariadb bash; ;; \
+	esac
+
 re: clean down up
 
 clean:
@@ -34,6 +42,5 @@ fclean: clean
 ps:
 	docker ps -a
 
-e: down
-
 # .PHONY: all clean fclean re e
+# mariadb -u root -p
