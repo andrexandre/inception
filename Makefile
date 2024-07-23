@@ -21,6 +21,12 @@ help:
 all:
 	@sudo docker compose -f srcs/docker-compose.yml $(CMD)
 
+upd:
+	@sudo docker compose -f srcs/docker-compose.yml up -d
+
+downv:
+	@sudo docker compose -f srcs/docker-compose.yml down -v
+
 exec:
 	@read -p "1 - nginx, 2 - wordpress, 3 - mariadb: " choice && \
 	case $$choice in \
@@ -43,4 +49,11 @@ ps:
 	docker ps -a
 
 # .PHONY: all clean fclean re e
+
+# Syntax notes:
 # mariadb -u root -p
+# write mariadb password
+# show databases;
+# use <database>
+# show tables;
+# select * from <table>;
