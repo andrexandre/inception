@@ -57,3 +57,4 @@ ps:
 # use <database>
 # show tables;
 # select * from <table>;
+# docker compose watch
