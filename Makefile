@@ -28,7 +28,8 @@ downv:
 	@sudo docker compose -f srcs/docker-compose.yml down -v
 
 exec:
-	@read -p "1 - nginx, 2 - wordpress, 3 - mariadb: " choice && \
+	@echo 1 - nginx, 2 - wordpress, 3 - mariadb
+	@read -p "Choose a container to enter into: " choice && \
 	case $$choice in \
 		1) docker exec -it nginx bash; ;; \
 		2) docker exec -it wordpress bash; ;; \

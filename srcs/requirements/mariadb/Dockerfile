@@ -15,7 +15,7 @@ FROM mariadb
 COPY ../../.env /usr/src/app/.env
 
 # Copy the SQL script to initialize the database
-COPY init.sql /docker-entrypoint-initdb.d/
+# COPY init.sql /docker-entrypoint-initdb.d/
 
 # Set the environment variables for MariaDB and Start the MariaDB server
 CMD ["sh", "-c", "source /usr/src/app/.env && mysqld"]
