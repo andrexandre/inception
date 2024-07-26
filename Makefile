@@ -19,13 +19,13 @@ help:
 	@curl -s https://pastebin.com/raw/efMyMp23
 
 all:
-	@sudo docker compose -f srcs/docker-compose.yml $(CMD)
+	@docker compose -f srcs/docker-compose.yml $(CMD)
 
 upd:
-	@sudo docker compose -f srcs/docker-compose.yml up -d
+	@docker compose -f srcs/docker-compose.yml up -d
 
 downv:
-	@sudo docker compose -f srcs/docker-compose.yml down -v
+	@docker compose -f srcs/docker-compose.yml down -v
 
 exec:
 	@echo 1 - nginx, 2 - wordpress, 3 - mariadb
@@ -53,9 +53,9 @@ ps:
 
 # Syntax notes:
 # mariadb -u root -p
-# write mariadb password
+# <mariadb root password>
 # show databases;
 # use <database>
 # show tables;
 # select * from <table>;
-# docker compose watch
+# i need to test 'docker compose watch'
