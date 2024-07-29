@@ -1,21 +1,19 @@
-# Use the official MariaDB image as the base image
-FROM mariadb
+FROM debian:bullseye-slim
 
-# # Install MariaDB
-# RUN apt-get update && \
-#     apt-get install -y \
-#     mariadb-server && \
-#     rm -rf /var/lib/apt/lists/*
+EXPOSE 3306
+
+RUN apt-get update && \
+	apt-get install -y 
+	mariadb-server && \
+	rm -rf /var/lib/apt/lists/*
 # remove that folder to reduce the image size
 
-# # Expose the default MySQL port
-# EXPOSE 3306
+COPY ./tools/config.sh /tmp/config.sh
 
-# Copy the .env file to the container
-COPY ../../.env /usr/src/app/.env
+RUN chmod 777 /tmp/config.sh
 
-# Copy the SQL script to initialize the database
-# COPY init.sql /docker-entrypoint-initdb.d/
+# # will always be executed when the container starts
+# ENTRYPOINT ["/tmp/config.sh"]
 
-# Set the environment variables for MariaDB and Start the MariaDB server
-CMD ["sh", "-c", "source /usr/src/app/.env && mysqld"]
+# # These are the default arguments passed to config.sh
+# CMD ["mysqld_safe", "--bind-address=0.0.0.0"]

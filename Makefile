@@ -15,6 +15,7 @@ CMD = help
 %:
 	@$(MAKE) -s all CMD=$@
 
+# outdated
 help:
 	@curl -s https://pastebin.com/raw/efMyMp23
 
@@ -36,7 +37,7 @@ exec:
 		3) docker exec -it mariadb bash; ;; \
 	esac
 
-re: clean down up
+re: clean downv upd
 
 clean:
 	docker container prune -f
@@ -46,8 +47,16 @@ fclean: clean
 	-docker rmi -f $$(docker images -q)
 	@echo "\n$(BLUE)images $(GREEN)cleaned$(END) 🗑️\n"
 
-ps:
-	docker ps -a
+eval:
+	docker stop $(docker ps -qa); \
+	docker rm $(docker ps -qa); \
+	docker rmi -f $(docker images -qa); \
+	docker volume rm $(docker volume ls -q); \
+	docker network rm $(docker network ls -q) 2>/dev/null
+# this command will:
+# stop and remove all the containers;
+# remove all images, volumes and networks;
+# silence any error message by sending it do /dev/null
 
 # .PHONY: all clean fclean re e
 
