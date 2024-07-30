@@ -12,8 +12,14 @@ COPY ./tools/config.sh /tmp/config.sh
 
 RUN chmod 777 /tmp/config.sh
 
-# # will always be executed when the container starts
-# ENTRYPOINT ["/tmp/config.sh"]
+# will always be executed when the container starts
+ENTRYPOINT ["/tmp/config.sh"]
 
-# # These are the default arguments passed to config.sh
-# CMD ["mysqld_safe", "--bind-address=0.0.0.0"]
+# These are the default arguments passed to config.sh
+CMD ["mysqld_safe", "--bind-address=0.0.0.0"]
+
+# Notes for config.sh:
+# mysql_secure_installation is to make a more secure installation
+# <<-EOF is to ignore leading tabs
+# '@'%' allows the user to connect from any host
+# 'root'@'localhost' root user connecting from localhost

@@ -37,7 +37,7 @@ exec:
 		3) docker exec -it mariadb bash; ;; \
 	esac
 
-re: clean downv upd
+re: clean down up
 
 clean:
 	docker container prune -f

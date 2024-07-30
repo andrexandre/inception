@@ -2,7 +2,7 @@
 
 echo "Configuring MariaDB..."
 
-if [ -d "/var/lib/mysql/$DB_NAME" ]; then
+if [ -d "/var/lib/mysql/$MYSQL_NAME" ]; then
 	echo "Database already exists"
 else
 	service mariadb start
@@ -12,25 +12,25 @@ else
 	mysql_secure_installation <<-END
 
 	y
-	$DB_ROOT_PASSWORD
-	$DB_ROOT_PASSWORD
+	$MYSQL_ROOT_PASSWORD
+	$MYSQL_ROOT_PASSWORD
 	y
 	y
 	y
 	y
 	END
+
 	echo "MariaDB configured"
 	echo "Creating Database..."
 
 	mysql -u root <<-EOF
-		CREATE DATABASE IF NOT EXISTS $DB_NAME;
-		CREATE USER IF NOT EXISTS '$DB_USER'@'%' IDENTIFIED BY '$DB_PASSWORD';
-		GRANT ALL PRIVILEGES ON *.* TO '$DB_USER'@'%';
+		CREATE DATABASE IF NOT EXISTS $MYSQL_NAME;
+		CREATE USER IF NOT EXISTS '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD';
+		GRANT ALL PRIVILEGES ON *.* TO '$MYSQL_USER'@'%';
 		FLUSH PRIVILEGES;
-		ALTER USER 'root'@'localhost' IDENTIFIED BY '$DB_ROOT_PASSWORD';
+		ALTER USER 'root'@'localhost' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD';
 		FLUSH PRIVILEGES;
 	EOF
-
 fi
 
 echo "Database created"
