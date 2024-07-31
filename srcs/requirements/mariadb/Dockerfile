@@ -2,20 +2,20 @@ FROM debian:bullseye-slim
 
 EXPOSE 3306
 
+# remove that folder to reduce the image size
 RUN apt-get update && \
-	apt-get install -y 
+	apt-get install -y \
 	mariadb-server && \
 	rm -rf /var/lib/apt/lists/*
-# remove that folder to reduce the image size
 
-COPY ./tools/config.sh /tmp/config.sh
+COPY conf/config.sh /home/config.sh
 
-RUN chmod 777 /tmp/config.sh
+RUN chmod 777 /home/config.sh
 
 # will always be executed when the container starts
-ENTRYPOINT ["/tmp/config.sh"]
+ENTRYPOINT ["/home/config.sh"]
 
-# These are the default arguments passed to config.sh
+# these are the default arguments passed to config.sh
 CMD ["mysqld_safe", "--bind-address=0.0.0.0"]
 
 # Notes for config.sh:

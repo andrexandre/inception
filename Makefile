@@ -37,7 +37,8 @@ exec:
 		3) docker exec -it mariadb bash; ;; \
 	esac
 
-re: clean down up
+re: down build upd
+	@true
 
 clean:
 	docker container prune -f
@@ -46,6 +47,10 @@ clean:
 fclean: clean
 	-docker rmi -f $$(docker images -q)
 	@echo "\n$(BLUE)images $(GREEN)cleaned$(END) 🗑️\n"
+
+prune:
+	-docker stop $(docker ps -qa)
+	docker system prune -af
 
 eval:
 	docker stop $(docker ps -qa); \
