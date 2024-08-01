@@ -15,18 +15,28 @@ CMD = help
 %:
 	@$(MAKE) -s all CMD=$@
 
-# outdated
 help:
-	@curl -s https://pastebin.com/raw/efMyMp23
+	@curl -s https://pastebin.com/raw/XtwsedRc
 
 all:
-	@docker compose -f srcs/docker-compose.yml $(CMD)
+	@sudo docker compose -f srcs/docker-compose.yml $(CMD)
 
 upd:
-	@docker compose -f srcs/docker-compose.yml up -d
+	@sudo docker compose -f srcs/docker-compose.yml up -d
 
 downv:
-	@docker compose -f srcs/docker-compose.yml down -v
+	@sudo docker compose -f srcs/docker-compose.yml down -v
+
+folders:
+	@mkdir -p ~/data
+	@mkdir -p ~/data/mariadb
+	@mkdir -p ~/data/wordpress
+	@echo Folders created
+
+rmfolders:
+	@sudo rm -rf ~/data/mariadb/*
+	@sudo rm -rf ~/data/wordpress/*
+	@echo Folders cleaned
 
 exec:
 	@echo 1 - nginx, 2 - wordpress, 3 - mariadb
@@ -37,39 +47,30 @@ exec:
 		3) docker exec -it mariadb bash; ;; \
 	esac
 
-re: down build upd
+re: rmfolders down build upd
 	@true
 
-clean:
-	docker container prune -f
-	@echo "\n$(BLUE)containers $(GREEN)cleaned$(END) 🗑️\n"
+# list all containers, images, volumes and networks
+status:
+	docker ps -a
+	@echo
+	docker image ls
+	@echo
+	docker volume ls
+	@echo
+	docker network ls --filter "name=$(NAME)"
 
-fclean: clean
-	-docker rmi -f $$(docker images -q)
-	@echo "\n$(BLUE)images $(GREEN)cleaned$(END) 🗑️\n"
-
-prune:
-	-docker stop $(docker ps -qa)
-	docker system prune -af
-
-eval:
-	docker stop $(docker ps -qa); \
-	docker rm $(docker ps -qa); \
-	docker rmi -f $(docker images -qa); \
-	docker volume rm $(docker volume ls -q); \
-	docker network rm $(docker network ls -q) 2>/dev/null
-# this command will:
 # stop and remove all the containers;
 # remove all images, volumes and networks;
-# silence any error message by sending it do /dev/null
+# silence errors by sending them to /dev/null
+prune:
+	docker stop $$(docker ps -qa); \
+	docker rm $$(docker ps -qa); \
+	docker rmi -f $$(docker images -qa); \
+	docker volume rm $$(docker volume ls -q); \
+	docker network rm $$(docker network ls -q) 2>/dev/null
 
-# .PHONY: all clean fclean re e
+.PHONY: help all upd downv exec re status prune folders rmfolders
 
-# Syntax notes:
-# mariadb -u root -p
-# <mariadb root password>
-# show databases;
-# use <database>
-# show tables;
-# select * from <table>;
-# i need to test 'docker compose watch'
+# Notes:
+# test 'docker compose watch'

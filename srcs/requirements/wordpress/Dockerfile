@@ -29,3 +29,14 @@ ENTRYPOINT ["/home/config.sh"]
 
 # start the php-FastCGI Process Manager in the background
 CMD ["php-fpm7.4", "-F"]
+
+# Notes for config.sh:
+# chown - change ownership, -R - recursive
+# www-data:www-data - <user>:<group>
+# WIP - maybe remove some of the lines in www.conf
+# mandatory - listen, user, pm, pm.max_children
+# Notes for www.conf:
+# user/group - user/group of FPM processes
+# listen - address on which to accept FastCGI requests
+# listen.owner/group - permissions for socket
+# pm - how number of child processes is set

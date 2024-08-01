@@ -15,40 +15,39 @@ services:
       - .env
     # restart: "on-failure"
 
-  # wordpress:
-  #   image: wordpress
-  #   container_name: wordpress
-  #   build:
-  #     context: ./requirements/wordpress/
-  #     dockerfile: Dockerfile
-  #   volumes:
-  #     - wordpress:/var/www/html
-  #   networks:
-  #     - inception
-  #   depends_on:
-  #     - mariadb
-  #   env_file:
-  #     - .env
-  #   # restart: "on-failure"
+  wordpress:
+    image: wordpress
+    container_name: wordpress
+    build:
+      context: ./requirements/wordpress/
+      dockerfile: Dockerfile
+    volumes:
+      - wordpress:/var/www/html
+    networks:
+      - inception
+    depends_on:
+      - mariadb
+    env_file:
+      - .env
+    # restart: "on-failure"
 
-  # nginx:
-  #   image: nginx
-  #   container_name: nginx
-  #   build:
-  #     context: ./requirements/nginx/
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - 443:80
-  #     # - 443:443
-  #   # volumes:
-  #   #   - wordpress:/var/www/html
-  #   networks:
-  #     - inception
-  #   depends_on:
-  #     - wordpress
-  #   env_file:
-  #     - .env
-  #   # restart: "on-failure"
+  nginx:
+    image: nginx
+    container_name: nginx
+    build:
+      context: ./requirements/nginx/
+      dockerfile: Dockerfile
+    ports:
+      - 443:443
+    volumes:
+      - wordpress:/var/www/html
+    networks:
+      - inception
+    depends_on:
+      - wordpress
+    env_file:
+      - .env
+    # restart: "on-failure"
 
 networks:
   inception:
@@ -61,9 +60,9 @@ volumes:
       type: none
       device: /home/andrealex/data/mariadb
       o: bind
-  # wordpress:
-  #   name: wordpress
-  #   driver_opts:
-  #     type: none
-  #     device: /home/andrealex/data/wordpress
-  #     o: bind
+  wordpress:
+    name: wordpress
+    driver_opts:
+      type: none
+      device: /home/andrealex/data/wordpress
+      o: bind
