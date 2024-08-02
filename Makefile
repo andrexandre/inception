@@ -34,9 +34,12 @@ folders:
 	@echo Folders created
 
 rmfolders:
-	@sudo rm -rf ~/data/mariadb/*
-	@sudo rm -rf ~/data/wordpress/*
+	@sudo rm -rf ~/data/mariadb/**
+	@sudo rm -rf ~/data/wordpress/**
 	@echo Folders cleaned
+
+lsfolders:
+	@ls -la ~/data/**
 
 exec:
 	@echo 1 - nginx, 2 - wordpress, 3 - mariadb
@@ -47,7 +50,7 @@ exec:
 		3) docker exec -it mariadb bash; ;; \
 	esac
 
-re: down rmfolders build upd
+re: downv rmfolders build up
 	@true
 
 # list all containers, images, volumes and networks
