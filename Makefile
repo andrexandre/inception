@@ -47,7 +47,7 @@ exec:
 		3) docker exec -it mariadb bash; ;; \
 	esac
 
-re: rmfolders down build upd
+re: down rmfolders build upd
 	@true
 
 # list all containers, images, volumes and networks
@@ -63,6 +63,7 @@ status:
 # stop and remove all the containers;
 # remove all images, volumes and networks;
 # silence errors by sending them to /dev/null
+# sudo docker system prune -a
 prune:
 	docker stop $$(docker ps -qa); \
 	docker rm $$(docker ps -qa); \
