@@ -25,6 +25,8 @@ COPY tools/config.sh /home
 
 RUN chmod 777 /home/config.sh
 
+RUN mkdir -p /var/www/wordpress && chmod 755 /var/www/wordpress
+
 ENTRYPOINT ["/home/config.sh"]
 
 # start the php-FastCGI Process Manager in the background
