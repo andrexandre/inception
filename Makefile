@@ -21,6 +21,9 @@ help:
 all:
 	@sudo docker compose -f srcs/docker-compose.yml $(CMD)
 
+build-up:
+	@sudo docker compose -f srcs/docker-compose.yml up --build
+
 upd:
 	@sudo docker compose -f srcs/docker-compose.yml up -d
 
