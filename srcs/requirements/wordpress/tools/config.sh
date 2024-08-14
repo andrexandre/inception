@@ -10,10 +10,10 @@ if [ ! -e "/var/www/html/wp-config.php" ]; then
 	wp core download --allow-root
 
 	wp config create --allow-root \
-					--dbname=$DB_NAME \
-					--dbuser=$DB_USER \
-					--dbpass=$DB_PASSWORD \
-					--dbhost=$DB_HOST \
+					--dbname=$MYSQL_NAME \
+					--dbuser=$MYSQL_USER \
+					--dbpass=$MYSQL_PASSWORD \
+					--dbhost=$WP_HOST \
 					--path=$WP_PATH
 
 	wp core install --allow-root \
