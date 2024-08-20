@@ -31,23 +31,23 @@ services:
       - .env
     # restart: "on-failure"
 
-  # nginx:
-  #   image: nginx
-  #   container_name: nginx
-  #   build:
-  #     context: ./requirements/nginx/
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - 443:443
-  #   volumes:
-  #     - wordpress:/var/www/html
-  #   networks:
-  #     - inception
-  #   depends_on:
-  #     - wordpress
-  #   env_file:
-  #     - .env
-  #   # restart: "on-failure"
+  nginx:
+    image: nginx
+    container_name: nginx
+    build:
+      context: ./requirements/nginx/
+      dockerfile: Dockerfile
+    ports:
+      - 443:443
+    volumes:
+      - wordpress:/var/www/html
+    networks:
+      - inception
+    depends_on:
+      - wordpress
+    env_file:
+      - .env
+    # restart: "on-failure"
 
 networks:
   inception:
@@ -58,11 +58,11 @@ volumes:
     name: mariadb
     driver_opts:
       type: none
-      device: /home/andrealex/data/mariadb
+      device: /home/analexan/data/mariadb
       o: bind
   wordpress:
     name: wordpress
     driver_opts:
       type: none
-      device: /home/andrealex/data/wordpress
+      device: /home/analexan/data/wordpress
       o: bind

@@ -8,7 +8,6 @@ if [ ! -d "/var/lib/mysql/$MYSQL_NAME" ]; then
 	sleep 1
 
 	mysql_secure_installation <<-END
-
 	y
 	$MYSQL_ROOT_PASSWORD
 	$MYSQL_ROOT_PASSWORD
@@ -29,6 +28,8 @@ if [ ! -d "/var/lib/mysql/$MYSQL_NAME" ]; then
 		ALTER USER 'root'@'localhost' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD';
 		FLUSH PRIVILEGES;
 	EOF
+
+    mysqladmin -u root -p"$MYSQL_ROOT_PASSWORD" shutdown
 
 	echo "Database created"
 fi

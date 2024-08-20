@@ -19,10 +19,12 @@ ENTRYPOINT ["/home/config.sh"]
 CMD ["mysqld_safe", "--bind-address=0.0.0.0"]
 
 # Notes for config.sh:
-# mysql_secure_installation is to make a more secure installation
+# mysql_secure_installation is a tool to make a more secure installation
 # <<-EOF is to ignore leading tabs
 # '@'%' allows the user to connect from any host
 # 'root'@'localhost' root user connecting from localhost
+# mysqladmin -u root -p"$MYSQL_ROOT_PASSWORD" shutdown
+# i used mysqladmin to shutdown the server because it was the only way i know
 # MYSQL commands:
 # mariadb -u root -p
 # <mariadb root password>

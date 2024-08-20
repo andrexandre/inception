@@ -45,15 +45,15 @@ lsfolders:
 	@ls -la ~/data/**
 
 exec:
-	@echo 1 - nginx, 2 - wordpress, 3 - mariadb
+	@echo 1 - mariadb , 2 - wordpress, 3 - nginx
 	@read -p "Choose a container to enter into: " choice && \
 	case $$choice in \
-		1) docker exec -it nginx bash; ;; \
+		1) docker exec -it mariadb bash; ;; \
 		2) docker exec -it wordpress bash; ;; \
-		3) docker exec -it mariadb bash; ;; \
+		3) docker exec -it nginx bash; ;; \
 	esac
 
-re: downv rmfolders build up
+re: prune rmfolders build up
 	@true
 
 # list all containers, images, volumes and networks
@@ -66,11 +66,17 @@ status:
 	@echo
 	docker network ls --filter "name=$(NAME)"
 
+prune:
+	-docker stop $$(docker ps -qa)
+	-docker rm $$(docker ps -qa)
+	-docker rmi -f $$(docker images -qa)
+	-docker volume rm $$(docker volume ls -q)
+	-docker network rm $$(docker network ls --filter "name=$(NAME)" -q)
+
 # stop and remove all the containers;
 # remove all images, volumes and networks;
 # silence errors by sending them to /dev/null
-# sudo docker system prune -a
-prune:
+eval:
 	docker stop $$(docker ps -qa); \
 	docker rm $$(docker ps -qa); \
 	docker rmi -f $$(docker images -qa); \
@@ -78,6 +84,3 @@ prune:
 	docker network rm $$(docker network ls -q) 2>/dev/null
 
 .PHONY: help all upd downv exec re status prune folders rmfolders
-
-# Notes:
-# test 'docker compose watch'

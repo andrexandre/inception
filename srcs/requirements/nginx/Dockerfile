@@ -19,7 +19,7 @@ RUN mkdir -p /run/nginx
 # -subj "/C=...st/" details for the certificate:
 # country (C), state (ST), locality (L), organization (O), organizational unit (OU), common name (CN)
 RUN mkdir -p /etc/nginx/ssl && openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/server.key -out /etc/nginx/ssl/server.crt \
-    -subj "/C=PT/ST=Lisbon/L=Lisbon/O=42Lisboa/OI=analexan/CN=localhost/"
+    -subj "/C=PT/ST=Lisbon/L=Lisbon/O=42Lisboa/OU=analexan/CN=localhost/"
 
 RUN chmod 777 /etc/nginx/ssl/server.crt /etc/nginx/ssl/server.key
 

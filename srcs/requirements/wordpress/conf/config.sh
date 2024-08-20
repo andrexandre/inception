@@ -21,7 +21,8 @@ if [ ! -e "/var/www/html/wp-config.php" ]; then
 				--title="$WP_TITLE" \
 				--admin_user="$WP_ADMIN_USER" \
 				--admin_password="$WP_ADMIN_PASSWORD" \
-				--admin_email="$WP_ADMIN_EMAIL"
+				--admin_email="$WP_ADMIN_EMAIL" \
+				--skip-email
 
 	wp user create --allow-root \
 					"$WP_SECOND_USER" \
