@@ -29,3 +29,16 @@ RUN chown -R www-data:www-data /var/www/html
 
 # -g daemon off; serves nginx to run in the foreground
 CMD ["nginx", "-g", "daemon off;"]
+
+# Notes for nginx.conf:
+# listen - server should listen on port 443 for IPv4 and IPv6 with ssl
+# root - the server will serve files from /var/www/html
+# ssl_protocols - restricts the server to use only TLSv1.2 and TLSv1.3
+# location - specifies what the requests to that location should do
+# index - the server will look for index.php first and then index.html
+# ~ \.php$ - expression that matches any request ending with .php
+# fastcgi_pass - sends the requests to the specified FastCGI server
+# fastcgi_index - sets the default file to serve if the request is for a directory
+# include fastcgi_params - includes a set of predefined FastCGI parameters
+# fastcgi_param - sets a parameter to a value
+# $document_root - root directory of the server, $fastcgi_script_name - name of the script

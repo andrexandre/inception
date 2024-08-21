@@ -16,7 +16,7 @@ RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.ph
 	chmod +x wp-cli.phar && \
 	mv wp-cli.phar /usr/local/bin/wp
 
-# create the folder for runtime data, such as pid, etc... (php bug)
+# create the folder for runtime data, such as pid, etc...
 RUN mkdir -p /run/php/ && chmod 755 /run/php/
 
 COPY conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
@@ -36,7 +36,9 @@ CMD ["php-fpm7.4", "-F"]
 # WIP - maybe remove some of the lines in www.conf
 # mandatory - listen, user, pm, pm.max_children
 # Notes for www.conf:
-# user/group - user/group of FPM processes
+# user - user of FPM processes
 # listen - address on which to accept FastCGI requests
-# listen.owner/group - permissions for socket
-# pm - how number of child processes is set
+# pm - how the pm will control the number of child processes
+# pm.start_servers - number of child processes created on startup
+# pm.min/max_spare_servers - min/max number of idle server processes
+# clear_env - clear the env in pm processes

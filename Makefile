@@ -53,8 +53,9 @@ exec:
 		3) docker exec -it nginx bash; ;; \
 	esac
 
-re: prune rmfolders build up
-	@true
+re: stop build upd
+
+rep: prune rmfolders build up
 
 # list all containers, images, volumes and networks
 status:
