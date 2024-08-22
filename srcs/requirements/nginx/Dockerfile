@@ -38,7 +38,6 @@ CMD ["nginx", "-g", "daemon off;"]
 # index - the server will look for index.php first and then index.html
 # ~ \.php$ - expression that matches any request ending with .php
 # fastcgi_pass - sends the requests to the specified FastCGI server
-# fastcgi_index - sets the default file to serve if the request is for a directory
 # include fastcgi_params - includes a set of predefined FastCGI parameters
 # fastcgi_param - sets a parameter to a value
 # $document_root - root directory of the server, $fastcgi_script_name - name of the script

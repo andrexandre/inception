@@ -27,9 +27,6 @@ build-up:
 upd:
 	@sudo docker compose -f srcs/docker-compose.yml up -d
 
-downv:
-	@sudo docker compose -f srcs/docker-compose.yml down -v
-
 folders:
 	@mkdir -p ~/data
 	@mkdir -p ~/data/mariadb
@@ -84,4 +81,4 @@ eval:
 	docker volume rm $$(docker volume ls -q); \
 	docker network rm $$(docker network ls -q) 2>/dev/null
 
-.PHONY: help all upd downv exec re status prune folders rmfolders
+.PHONY: help all build-up upd folders rmfolders lsfolders exec re rep status prune eval
