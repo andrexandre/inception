@@ -1,14 +1,4 @@
-END			= \033[0m
-RED			= \033[1;31m
-GREEN		= \033[1;32m
-YELLOW		= \033[1;33m
-BLUE		= \033[1;34m
-MAGENTA		= \033[1;35m
-CYAN		= \033[1;36m
-WHITE		= \033[1;37m
-
-NAME		= inception
-HOST_URL	= analexan.42.fr
+NAME = inception
 
 CMD = help
 
@@ -64,21 +54,14 @@ status:
 	@echo
 	docker network ls --filter "name=$(NAME)"
 
+# stop and remove all the containers;
+# remove all images, volumes and networks;
+# silence errors by sending them to /dev/null
 prune:
 	-docker stop $$(docker ps -qa)
 	-docker rm $$(docker ps -qa)
 	-docker rmi -f $$(docker images -qa)
 	-docker volume rm $$(docker volume ls -q)
 	-docker network rm $$(docker network ls --filter "name=$(NAME)" -q)
-
-# stop and remove all the containers;
-# remove all images, volumes and networks;
-# silence errors by sending them to /dev/null
-eval:
-	docker stop $$(docker ps -qa); \
-	docker rm $$(docker ps -qa); \
-	docker rmi -f $$(docker images -qa); \
-	docker volume rm $$(docker volume ls -q); \
-	docker network rm $$(docker network ls -q) 2>/dev/null
 
 .PHONY: help all build-up upd folders rmfolders lsfolders exec re rep status prune eval
