@@ -1,5 +1,5 @@
 # Inception
-This README.md is my notes for the inception project that you can use as documentation.
+This README.md is the first thing i learned in this project, this is how to work with a single docker container.
 
 ### First docker commands:
 ```
@@ -45,12 +45,3 @@ to list the images in your disk you can do:
 
 `docker exec -it inception bash`
 > enters into the container
-
-WIP...
-
-docker0 is the virtual bridge interface.
-
-docker network ls
-DRIVER = network type
-
-docker network create <name>
