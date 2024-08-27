@@ -6,6 +6,12 @@ RUN apt-get update && \
 	apt-get install -y \
 	nginx \
 	openssl \
+	curl \
+	zsh \
+	git \
+	nano \
+	wget \
+	mailcap \
 	&& rm -rf /var/lib/apt/lists/*
 
 # create the folder for runtime data, such as pid, etc...
@@ -26,6 +32,16 @@ RUN chmod 777 /etc/nginx/ssl/server.crt /etc/nginx/ssl/server.key
 COPY ./conf/nginx.conf /etc/nginx/conf.d
 
 RUN chown -R www-data:www-data /var/www/html
+
+RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+RUN sed -i 's/robbyrussell/simple/g' $HOME/.zshrc && \
+	echo alias reload-nginx="'nginx -s reload'" >> $HOME/.zshrc && \
+	echo alias edit-nginx="'nano /etc/nginx/conf.d/nginx.conf'" >> $HOME/.zshrc && \
+	echo alias cd-nginx="'cd /var/www/html'" >> $HOME/.zshrc && \
+	echo ": 1000000000:0;reload-nginx" >> $HOME/.zsh_history && \
+	echo ": 1000000000:0;edit-nginx" >> $HOME/.zsh_history && \
+	echo ": 1000000000:0;cd-nginx" >> $HOME/.zsh_history
 
 # -g daemon off; serves nginx to run in the foreground
 CMD ["nginx", "-g", "daemon off;"]

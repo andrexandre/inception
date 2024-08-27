@@ -37,8 +37,11 @@ exec:
 	case $$choice in \
 		1) docker exec -it mariadb bash; ;; \
 		2) docker exec -it wordpress bash; ;; \
-		3) docker exec -it nginx bash; ;; \
+		3) docker exec -it nginx zsh; ;; \
 	esac
+
+nginx:
+	@docker exec -it nginx zsh
 
 re: stop build upd
 

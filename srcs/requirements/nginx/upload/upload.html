@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload - Simple Site</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+				<li><a href="upload.html">Upload</a></li>
+                <li><a href="contacts.html">Contacts</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Upload</h1>
+        <img src="upload.png" alt="Upload Image">
+
+        <!-- Formulário de Upload de Ficheiro -->
+        <h2>Upload de Ficheiro</h2>
+        <form action="upload.php" method="post" enctype="multipart/form-data">
+            <label>Escolha um ficheiro:</label>
+			<input type="hidden" name="MAX_FILE_SIZE" value="30000" />
+            <input type="file" id="fileid" name="filename" required>
+            <br><br>
+            <input type="submit" value="Upload">
+        </form>
+        <!-- Fim do Formulário de Upload -->
+
+        <p><a href="index.html" class="back-button">Home page</a></p>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Simple Site.</p>
+    </footer>
+</body>
+</html>
