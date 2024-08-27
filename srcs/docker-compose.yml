@@ -56,11 +56,11 @@ volumes:
     name: mariadb
     driver_opts:
       type: none
-      device: /home/analexan/data/mariadb
+      device: ${USER_HOME}/data/mariadb
       o: bind
   wordpress:
     name: wordpress
     driver_opts:
       type: none
-      device: /home/analexan/data/wordpress
+      device: ${USER_HOME}/data/wordpress
       o: bind

@@ -5,7 +5,7 @@ CMD = help
 %:
 	@$(MAKE) -s all CMD=$@
 
-help:
+help: home
 	@curl -s https://pastebin.com/raw/XtwsedRc
 
 all:
@@ -64,4 +64,7 @@ prune:
 	-docker volume rm $$(docker volume ls -q)
 	-docker network rm $$(docker network ls --filter "name=$(NAME)" -q)
 
-.PHONY: help all build-up upd folders rmfolders lsfolders exec re rep status prune eval
+home:
+	@sed -i 's|/home/analexan|'${HOME}'|g' srcs/.env
+
+.PHONY: help all build-up upd folders rmfolders lsfolders exec re rep status prune home
