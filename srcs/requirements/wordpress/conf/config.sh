@@ -30,6 +30,8 @@ if [ ! -e "/var/www/html/wp-config.php" ]; then
 					--role=author \
 					--user_pass="$WP_SECOND_USER_PASSWORD"
 
+	wp theme activate twentytwentyfour --allow-root
+
 	chown -R www-data:www-data /var/www/html
 
 	echo "WordPress configured successfully"
