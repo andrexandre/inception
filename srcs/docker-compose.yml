@@ -4,7 +4,6 @@ services:
     container_name: mariadb
     build:
       context: ./requirements/mariadb/
-      dockerfile: Dockerfile
     volumes:
       - mariadb:/var/lib/mysql
     networks:
@@ -18,7 +17,6 @@ services:
     container_name: wordpress
     build:
       context: ./requirements/wordpress/
-      dockerfile: Dockerfile
     volumes:
       - wordpress:/var/www/html
     networks:
@@ -34,7 +32,6 @@ services:
     container_name: nginx
     build:
       context: ./requirements/nginx/
-      dockerfile: Dockerfile
     ports:
       - 443:443
     volumes:

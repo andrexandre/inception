@@ -3,7 +3,6 @@ This README.md is the first thing i learned in this project, this is how to work
 
 ### First docker commands:
 ```
-docker pull ubuntu
 docker run -it ubuntu
 ```
 > `-i` or `--interactive`: keeps STDIN open, this means that you can interact with the running container.  
@@ -32,16 +31,16 @@ to list the images in your disk you can do:
 
 #### Other commands:
 
-`docker build -t inception .`
+`docker exec -it ubuntu bash`
+> enters into the container
+
+`docker build -t ubuntu .`
 > `-t` is to specify the name of the container
 
-`docker run --name=inception -p 443:80 inception`
+`docker run --name=ubuntu -p 443:80 ubuntu`
 > 443 is an opened port on our pc and 80 is on the container
 
-`docker stop inception`
+`docker stop ubuntu`
 
 `docker container prune -f`
 > removes all stopped containers
-
-`docker exec -it inception bash`
-> enters into the container
