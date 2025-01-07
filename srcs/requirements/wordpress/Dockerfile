@@ -7,7 +7,6 @@ RUN apt-get update && \
 	php7.4 \
 	php-fpm \
 	php-mysql \
-	mariadb-client \
 	wget \
 	&& rm -rf /var/lib/apt/lists/*
 

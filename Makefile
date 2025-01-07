@@ -9,13 +9,13 @@ help: home
 	@curl -s https://pastebin.com/raw/XtwsedRc
 
 all:
-	@sudo docker compose -f srcs/docker-compose.yml $(CMD)
+	@docker compose -f srcs/docker-compose.yml $(CMD)
 
 build-up:
-	@sudo docker compose -f srcs/docker-compose.yml up --build
+	@docker compose -f srcs/docker-compose.yml up --build
 
 upd:
-	@sudo docker compose -f srcs/docker-compose.yml up -d
+	@docker compose -f srcs/docker-compose.yml up -d
 
 folders:
 	@mkdir -p ~/data
