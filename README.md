@@ -51,3 +51,6 @@ Clean up all docker resources
 ```sh
 make prune
 ```
+
+> [!NOTE]
+> This project is part of the 42 School curriculum
