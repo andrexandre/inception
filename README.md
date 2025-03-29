@@ -1,47 +1,53 @@
 # Inception
-This README.md is the first thing i learned in this project, this is how to work with a single docker container.
 
-### First docker commands:
+This project aims to create a small containerized web infrastructure composed of different services under Docker.
+
+## Services
+
+This project uses the following Docker resources:
+
+- Container with NGINX
+- Container with WordPress + php-fpm
+- Container with MariaDB
+- Volumes for the WordPress database and website files
+- Network to establish connection between containers
+
+## Usage
+
+1. Clone the repository
+```sh
+git clone https://github.com/andrexandre/inception.git ; cd inception
 ```
-docker pull ubuntu
-docker run -it ubuntu
+
+2. Setup and show how to use information
+```sh
+make
 ```
-> `-i` or `--interactive`: keeps STDIN open, this means that you can interact with the running container.  
-`-t` or `--tty`: This option uses a TTY that allows you to interact with the running container as if it were a terminal.
 
-with this you are inside a ubuntu container
+3. Create the folders for the volumes
+```sh
+make folders
+```
 
-if you do Ctrl+D or exit you stop the container
+4. Add the following line in the `/etc/hosts` file
+```sh
+127.0.0.1	analexan.42.fr
+```
+> It is possible to have a custom hostname by also editing [.env](srcs/.env) and [nginx.conf](srcs/requirements/nginx/conf/nginx.conf) 
 
-to see the current containers you use:
+3. Build and start the containers
+```sh
+make build-up
+```
+> If docker is not installed, you can install it by running:\
+> `curl -fsSL https://get.docker.com | sudo sh`
 
-`docker ps -a`
-> `-a` is to list all the containers (not only the actively running)
+4. Open the site in a browser
+```sh
+open https://analexan.42.fr
+```
 
-when you exit the container, it stops, but its still in memory, to remove it you use
-
-`docker rm <NAME/CONTAINER ID>`
-
-now you have it all cleaned up, almost exactly how it was before
-
-exept that downloaded image that you pulled to the disk, in this case, ubuntu
-
-to list the images in your disk you can do:
-
-`docker images`
-
-#### Other commands:
-
-`docker build -t inception .`
-> `-t` is to specify the name of the container
-
-`docker run --name=inception -p 443:80 inception`
-> 443 is an opened port on our pc and 80 is on the container
-
-`docker stop inception`
-
-`docker container prune -f`
-> removes all stopped containers
-
-`docker exec -it inception bash`
-> enters into the container
+Clean up all docker resources
+```sh
+make prune
+```
